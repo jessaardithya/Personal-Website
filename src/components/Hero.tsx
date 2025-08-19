@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Download, Linkedin, Cloud, Database, Briefcase, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Cloud, Database, Briefcase } from 'lucide-react';
 import profileImg from '../assets/profile.jpg';
 
 const Hero = () => {
