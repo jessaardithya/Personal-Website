@@ -1,5 +1,5 @@
-// import React from 'react';
-import {  Linkedin, Mail, Phone } from 'lucide-react';
+import React from 'react';
+import { Heart, Linkedin, Mail, Phone } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -23,6 +23,16 @@ const Footer = () => {
               <li>
                 <a href="#hero" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
                   About
+                </a>
+              </li>
+              <li>
+                <a href="#tech-stack" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
+                  Tech Stack
+                </a>
+              </li>
+              <li>
+                <a href="#timeline" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
+                  Timeline
                 </a>
               </li>
               <li>
@@ -71,12 +81,11 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3 pt-2">
                 <a
-                  href="https://www.linkedin.com/in/jessa-ardithya-chriswantoro-3a8971179/"
+                  href="https://linkedin.com"
                   className="w-8 h-8 bg-blue-600 dark:bg-blue-700 rounded-lg flex items-center justify-center hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                    
                   <Linkedin size={16} />
                 </a>
               </div>
@@ -88,6 +97,7 @@ const Footer = () => {
           <p className="text-slate-400 dark:text-slate-500 text-sm">
             © 2025 Jessa Ardithya Chriswantoro. All rights reserved.
           </p>
+         
         </div>
       </div>
     </footer>
