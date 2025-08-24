@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { Award, Filter } from 'lucide-react';
+import { Award, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Certifications = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const certificationsPerPage = 12;
 
   const certifications = [
     // IBM Certifications
@@ -44,6 +46,10 @@ const Certifications = () => {
     ? certifications 
     : certifications.filter(cert => cert.category === selectedCategory);
 
+  const totalPages = Math.ceil(filteredCertifications.length / certificationsPerPage);
+  const startIndex = (currentPage - 1) * certificationsPerPage;
+  const currentCertifications = filteredCertifications.slice(startIndex, startIndex + certificationsPerPage);
+
   const getCategoryColor = (category: string) => {
     const colors = {
       'IBM': 'bg-blue-100 text-blue-700',
@@ -53,6 +59,15 @@ const Certifications = () => {
       'Professional': 'bg-gray-100 text-gray-700'
     };
     return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-700';
+  };
+
+  const handlePageChange = (page:number) => {
+    setCurrentPage(page);
+  };
+
+  const handleCategoryChange = (category:string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
   };
 
   return (
@@ -76,11 +91,11 @@ const Certifications = () => {
           {categories.map((category) => (
             <button
               key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+              onClick={() => handleCategoryChange(category)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
                 selectedCategory === category
-                  ? 'bg-blue-600 dark:bg-blue-700 text-white shadow'
-                  : 'bg-white dark:bg-gray-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-700 hover:-translate-y-0.5'
+                  ? 'bg-blue-600 dark:bg-blue-700 text-white'
+                  : 'bg-white dark:bg-gray-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-700'
               }`}
             >
               {category}
@@ -90,7 +105,7 @@ const Certifications = () => {
 
         {/* Certifications Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredCertifications.map((cert, index) => (
+          {currentCertifications.map((cert, index) => (
             <div key={index} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-200 border border-slate-100 dark:border-gray-700">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -114,6 +129,49 @@ const Certifications = () => {
             </div>
           ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2 mt-12">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`p-2 rounded-lg transition-colors duration-200 ${
+                currentPage === 1
+                  ? 'text-slate-400 dark:text-slate-600 cursor-not-allowed'
+                  : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              <ChevronLeft size={20} />
+            </button>
+            
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`px-4 py-2 rounded-lg transition-colors duration-200 ${
+                  currentPage === page
+                    ? 'bg-blue-600 dark:bg-blue-700 text-white'
+                    : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+            
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`p-2 rounded-lg transition-colors duration-200 ${
+                currentPage === totalPages
+                  ? 'text-slate-400 dark:text-slate-600 cursor-not-allowed'
+                  : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+        )}
 
         {/* Summary Stats */}
         <div className="mt-16 bg-white dark:bg-gray-800 rounded-lg p-8 shadow-sm">

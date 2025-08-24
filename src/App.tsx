@@ -1,9 +1,10 @@
 import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import TechStackVisualizer from './components/TechStackVisualizer';
-import ProjectTimeline from './components/ProjectTimeline';
+// import TechStackVisualizer from './components/TechStackVisualizer';
+// import ProjectTimeline from './components/ProjectTimeline';
 import Experience from './components/Experience';
+import Blog from './components/Blog';
 import Education from './components/Education';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
@@ -18,12 +19,13 @@ function App() {
         <Header />
         <main>
           <Hero />
-          <TechStackVisualizer />
-          <ProjectTimeline />
+          {/* <TechStackVisualizer /> */}
+          {/* <ProjectTimeline /> */}
           <Experience />
           <Education />
           <Skills />
           <Projects />
+          <Blog />
           <Certifications />
           <Contact />
         </main>

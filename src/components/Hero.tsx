@@ -23,16 +23,12 @@ const Hero = () => {
                 />
               </div>
               {/* Decorative elements */}
-              <div aria-hidden="true" className="absolute -top-4 -right-4 w-24 h-24 bg-blue-200 dark:bg-blue-800 rounded-full opacity-20"></div>
-              <div aria-hidden="true" className="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-300 dark:bg-blue-700 rounded-full opacity-20"></div>
+             
             </div>
           </div>
           
           {/* Content Section */}
           <div className="text-center lg:text-left order-2 lg:order-2 animate-fadeInUp">
-            {/* <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 text-xs font-medium mb-4">
-              <Sparkles size={14} /> Open to new opportunities
-            </span> */}
             <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-4">
               Jessa Ardithya
               <span className="block text-blue-600 dark:text-blue-400">Chriswantoro</span>
@@ -75,19 +71,6 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            {/* <a
-              href="#contact"
-              className="inline-flex items-center px-6 py-3 bg-blue-600 dark:bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-200"
-            >
-              Get In Touch
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center px-6 py-3 bg-slate-200 dark:bg-gray-700 text-slate-700 dark:text-slate-200 font-medium rounded-lg hover:bg-slate-300 dark:hover:bg-gray-600 transition-all duration-200 shadow-sm hover:shadow md:hover:translate-y-[-1px]"
-            >
-              <Download size={20} className="mr-2" />
-              Download CV
-            </a> */}
             <a
               href="https://www.linkedin.com/in/jessa-ardithya-chriswantoro-3a8971179/"
               target="_blank"

@@ -17,10 +17,10 @@ const Header = () => {
 
   const navItems = [
     { label: 'About', href: '#hero' },
-    { label: 'Tech Stack', href: '#tech-stack' },
-    { label: 'Timeline', href: '#timeline' },
+    // { label: 'Tech Stack', href: '#tech-stack' },
+    // { label: 'Timeline', href: '#timeline' },
     { label: 'Experience', href: '#experience' },
-    { label: 'Education', href: '#education' },
+    // { label: 'Education', href: '#education' },
     { label: 'Skills', href: '#skills' },
     { label: 'Projects', href: '#projects' },
     { label: 'Certifications', href: '#certifications' },
