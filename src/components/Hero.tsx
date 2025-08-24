@@ -24,6 +24,9 @@ const Hero = () => {
               </div>
               {/* Decorative elements */}
              
+              
+{/*               <div aria-hidden="true" className="absolute -top-4 -right-4 w-24 h-24 bg-blue-200 dark:bg-blue-800 rounded-full opacity-20"></div>
+              <div aria-hidden="true" className="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-300 dark:bg-blue-700 rounded-full opacity-20"></div> */}
             </div>
           </div>
           
