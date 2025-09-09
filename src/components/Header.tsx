@@ -23,7 +23,8 @@ const Header = () => {
     // { label: 'Education', href: '#education' },
     { label: 'Skills', href: '#skills' },
     { label: 'Projects', href: '#projects' },
-    { label: 'Certifications', href: '#certifications' },
+    { label: 'Blog', href: '#blog'},
+    // { label: 'Certifications', href: '#certifications' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -38,6 +39,7 @@ const Header = () => {
           <div className="flex-shrink-0">
             <h1 className="text-xl font-bold text-slate-900 dark:text-white">
               Jessa Ardithya
+              <span className="text-xl text-slte-900 text-blue"> Chriswantoro</span>
             </h1>
           </div>
           
