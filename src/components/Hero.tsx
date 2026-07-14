@@ -74,7 +74,7 @@ const Hero = () => (
           {/* Role tag */}
           <motion.div variants={item} className="flex flex-wrap items-center gap-3">
             <span className="font-mono text-sm text-ink/50 dark:text-cream/40">{'// '}</span>
-            <span className="font-display text-xl font-semibold text-ink dark:text-cream">Technical Sales Specialist</span>
+            <span className="font-display text-xl font-semibold text-ink dark:text-cream">Strategic Presales | Data & AI</span>
           </motion.div>
 
           {/* Bio */}
@@ -174,10 +174,10 @@ const Hero = () => (
         className="mt-20 lg:mt-24 pt-8 border-t border-ink/10 dark:border-cream/10 grid grid-cols-2 sm:grid-cols-4 gap-6"
       >
         {[
-          { value: '6+',   label: 'Years of experience',    color: 'text-violet' },
+          { value: '7+',   label: 'Years of experience',    color: 'text-violet' },
           { value: '40+',  label: 'Certifications earned',  color: 'text-sky' },
-          { value: '163%', label: '2024 target achieved',   color: 'text-lime' },
-          { value: '9',    label: 'New clients (2024–25)',   color: 'text-coral' },
+          { value: '10+', label: 'Products handle',   color: 'text-lime' },
+          { value: '10+',    label: 'Projects handle',   color: 'text-coral' },
         ].map(({ value, label, color }) => (
           <div key={label} className="space-y-1">
             <p className={`font-display text-4xl font-extrabold ${color}`}>{value}</p>

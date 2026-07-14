@@ -4,7 +4,7 @@ import { IconSchool, IconMapPin, IconCalendar, IconStar } from '@tabler/icons-re
 const education = [
   {
     degree: 'Bachelor of Computer Science',
-    school: 'Universitas Bina Nusantara Online Learning',
+    school: 'Universitas Bina Nusantara',
     loc: 'Jakarta',
     period: 'Jul 2021 — May 2025',
     honor: 'Magna Cum Laude — GPA 3.78',

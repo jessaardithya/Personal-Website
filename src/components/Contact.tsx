@@ -86,7 +86,7 @@ const Contact = () => (
             </div>
             <h3 className="font-display font-extrabold text-2xl text-cream mb-3">Jessa Ardithya</h3>
             <p className="text-sm text-cream/50 leading-relaxed mb-6">
-              Strategic Presales at PT. Synnex Metrodata Indonesia — 6+ years turning complex enterprise data technologies into real business outcomes.
+              Strategic Presales at PT. Synnex Metrodata Indonesia — 7+ years turning complex enterprise data technologies into real business outcomes.
             </p>
             <div className="space-y-2.5 mb-8">
               {[
