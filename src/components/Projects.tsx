@@ -1,124 +1,137 @@
-import { Calendar, Users, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { IconCalendar, IconBolt, IconCircleCheck } from '@tabler/icons-react';
 
-const Projects = () => {
-  const projects = [
-    {
-      title: 'BFI Finance - Alibaba Cloud Big Data Implementation',
-      year: '2020',
-      description: 'Successfully delivered BFI Finance\'s first Big Data platform on cloud, handled end-to-end independently. This project marked a milestone in the client\'s data modernization journey.',
-      technologies: ['Alibaba Cloud EMR', 'Big Data', 'Data Works', 'Change Data Capture'],
-      highlights: [
-        'First cloud-based Big Data platform for the client',
-        'End-to-end independent delivery',
-        'Implemented real-time data replication with CDC',
-        'Delivered on time despite limited resources'
-      ],
-      impact: 'Modernized client\'s data infrastructure and enabled real-time analytics capabilities'
-    },
-    {
-      title: 'IndoRE - SAS IFRS17 Implementation',
-      year: '2023',
-      description: 'Delivered both Development and Production environments for SAS IFRS17 in a regulatory-driven project, ensuring full alignment with OJK compliance before the 2024 financial reporting cycle.',
-      technologies: ['SAS IFRS17', 'SAS VIYA', 'Regulatory Compliance', 'Financial Reporting'],
-      highlights: [
-        'Full OJK compliance implementation',
-        'Development and Production environments',
-        'Met strict regulatory deadlines',
-        'Successfully coordinated between multiple teams'
-      ],
-      impact: 'Enabled client to meet 2024 regulatory requirements and streamlined financial reporting processes'
-    },
-    {
-      title: 'Custom CMS & Web Applications',
-      year: '2018',
-      description: 'During internship, developed multiple web applications including a Custom CMS, Sports Blog Platform, and Inventory Management System using Laravel and MySQL.',
-      technologies: ['Laravel', 'MySQL', 'PHP', 'Bootstrap', 'Authentication'],
-      highlights: [
-        'Role-based access control implementation',
-        'WYSIWYG editor integration',
-        'Real-time inventory tracking',
-        'Comment system and search functionality'
-      ],
-      impact: 'Gained foundational experience in full-stack development and database design'
-    }
-  ];
+const projects = [
+  {
+    num: '01',
+    title: 'BFI Finance — Big Data Platform',
+    year: '2020',
+    cat: 'Cloud / Big Data',
+    color: '#38BDF8',
+    gradient: 'from-sky-400/20 via-blue-500/10 to-transparent',
+    desc: "Delivered BFI Finance's first cloud-native Big Data platform, independently, end-to-end.",
+    highlights: ['First cloud Big Data platform for client', 'Real-time CDC implementation', 'On-premise → Cloud migration', 'Solo delivery under tight constraints'],
+    tags: ['Alibaba Cloud EMR', 'Big Data', 'Data Works', 'CDC'],
+    impact: "Modernised client's data infrastructure, enabling real-time analytics and faster business decisions.",
+  },
+  {
+    num: '02',
+    title: 'IndoRE — SAS IFRS17 Implementation',
+    year: '2023',
+    cat: 'Regulatory / Finance',
+    color: '#A78BFA',
+    gradient: 'from-violet-400/20 via-purple-500/10 to-transparent',
+    desc: 'Full-stack IFRS17 delivery across Dev and Prod environments with strict OJK compliance.',
+    highlights: ['OJK full compliance', 'Dev + Prod environments', 'Strict regulatory deadlines', 'Multi-team coordination'],
+    tags: ['SAS IFRS17', 'SAS VIYA', 'Regulatory Compliance', 'Financial Reporting'],
+    impact: 'Enabled timely 2024 regulatory reporting and streamlined financial workflows.',
+  },
+  {
+    num: '03',
+    title: 'Custom CMS & Web Apps',
+    year: '2018',
+    cat: 'Full-Stack Development',
+    color: '#FB923C',
+    gradient: 'from-orange-400/20 via-rose-500/10 to-transparent',
+    desc: 'Built multiple production apps during internship — CMS, Sports Blog, and Inventory System.',
+    highlights: ['Role-based access control', 'WYSIWYG editor integration', 'Real-time inventory tracking', 'Comment + search functionality'],
+    tags: ['Laravel', 'MySQL', 'PHP', 'Bootstrap'],
+    impact: 'Established foundational full-stack skills with production-grade delivery.',
+  },
+];
 
-  return (
-    <section id="projects" className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Featured Projects
-          </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Key projects demonstrating expertise in enterprise solutions and technical implementation
-          </p>
-        </div>
+const Projects = () => (
+  <section id="projects" className="py-24 bg-violet-soft dark:bg-[#0e0b1a] overflow-hidden">
+    <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="mb-14"
+      >
+        <div className="section-eyebrow">Case Studies</div>
+        <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-ink dark:text-cream tracking-tight">
+          Featured<br /><span className="text-violet-gradient">Projects</span>
+        </h2>
+      </motion.div>
 
-        <div className="space-y-8">
-          {projects.map((project, index) => (
-            <div key={index} className="bg-slate-50 dark:bg-gray-900 rounded-lg p-8 hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-4">
-                    <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">
-                      {project.title}
-                    </h3>
-                    <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400">
-                      <Calendar size={16} />
-                      <span className="text-sm font-medium">{project.year}</span>
+      <div className="space-y-6">
+        {projects.map((p, idx) => (
+          <motion.div
+            key={p.num}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ y: -3 }}
+            className="group rounded-3xl overflow-hidden bg-white dark:bg-white/4 border border-ink/6 dark:border-cream/6 transition-all duration-300 hover:shadow-2xl"
+            style={{ '--hover-shadow': `0 20px 60px ${p.color}25` } as React.CSSProperties}
+          >
+            {/* Gradient top strip */}
+            <div className={`h-1.5 bg-gradient-to-r ${p.gradient.replace('from-', 'from-').replace('/20', '').replace('/10', '/50')}`}
+              style={{ background: `linear-gradient(90deg, ${p.color}, ${p.color}40)` }}
+            />
+
+            <div className="p-6 lg:p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-8">
+                <div>
+                  {/* Header */}
+                  <div className="flex flex-wrap items-center gap-3 mb-4">
+                    <span className="font-mono text-5xl font-bold text-ink/6 dark:text-cream/6 select-none leading-none">{p.num}</span>
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <span className="font-mono text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full"
+                          style={{ background: `${p.color}18`, color: p.color }}>
+                          {p.cat}
+                        </span>
+                        <span className="flex items-center gap-1 font-mono text-[10px] text-ink/35 dark:text-cream/30">
+                          <IconCalendar size={10} />{p.year}
+                        </span>
+                      </div>
+                      <h3 className="font-display font-extrabold text-xl text-ink dark:text-cream leading-tight">{p.title}</h3>
                     </div>
                   </div>
 
-                  <p className="text-slate-700 dark:text-slate-300 mb-6">
-                    {project.description}
-                  </p>
+                  <p className="text-sm text-ink/55 dark:text-cream/45 leading-relaxed mb-5">{p.desc}</p>
 
-                  <div className="mb-6">
-                    <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
-                      <Zap size={16} className="text-blue-600 dark:text-blue-400" />
-                      Key Highlights
-                    </h4>
-                    <ul className="space-y-2">
-                      {project.highlights.map((highlight, hIndex) => (
-                        <li key={hIndex} className="text-slate-700 dark:text-slate-300 text-sm flex items-start">
-                          <span className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          {highlight}
-                        </li>
+                  {/* Highlights */}
+                  <div className="mb-5">
+                    <p className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-ink/30 dark:text-cream/30 mb-2">
+                      <IconBolt size={10} style={{ color: p.color }} />Key Highlights
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                      {p.highlights.map((h) => (
+                        <div key={h} className="flex items-start gap-2 text-xs text-ink/65 dark:text-cream/55">
+                          <IconCircleCheck size={13} style={{ color: p.color }} className="shrink-0 mt-0.5" />
+                          {h}
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full text-xs font-medium"
-                      >
-                        {tech}
+                  {/* Tech tags */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {p.tags.map((t) => (
+                      <span key={t} className="px-3 py-1 rounded-full text-xs font-semibold"
+                        style={{ background: `${p.color}12`, color: p.color }}>
+                        {t}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="lg:col-span-1">
-                  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border-l-4 border-blue-600 dark:border-blue-400">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Users size={16} className="text-blue-600 dark:text-blue-400" />
-                      <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Project Impact</h4>
-                    </div>
-                    <p className="text-slate-700 dark:text-slate-300 text-sm">
-                      {project.impact}
-                    </p>
-                  </div>
+                {/* Impact panel */}
+                <div className="rounded-2xl p-5 border flex flex-col justify-center"
+                  style={{ borderColor: `${p.color}25`, background: `${p.color}06` }}>
+                  <p className="font-mono text-[10px] uppercase tracking-widest mb-2" style={{ color: p.color }}>Impact</p>
+                  <p className="text-sm text-ink/70 dark:text-cream/60 leading-relaxed">{p.impact}</p>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </motion.div>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Projects;

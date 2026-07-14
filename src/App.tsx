@@ -1,9 +1,9 @@
 import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
 import Hero from './components/Hero';
-// import TechStackVisualizer from './components/TechStackVisualizer';
-// import ProjectTimeline from './components/ProjectTimeline';
-import Experience from './components/Experience';
+import TechStackVisualizer from './components/TechStackVisualizer';
+import ProjectTimeline from './components/ProjectTimeline';
+// import Experience from './components/Experience'; // kept as backup — replaced by ProjectTimeline
 import Blog from './components/Blog';
 import Education from './components/Education';
 import Skills from './components/Skills';
@@ -15,13 +15,12 @@ import Footer from './components/Footer';
 function App() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-slate-50 dark:bg-gray-900 transition-colors duration-300">
+      <div className="min-h-screen bg-cream dark:bg-ink font-sans">
         <Header />
         <main>
           <Hero />
-          {/* <TechStackVisualizer /> */}
-          {/* <ProjectTimeline /> */}
-          <Experience />
+          <TechStackVisualizer />
+          <ProjectTimeline />
           <Education />
           <Skills />
           <Projects />

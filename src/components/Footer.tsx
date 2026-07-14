@@ -1,107 +1,71 @@
-// import React from 'react';
-import { Linkedin, Mail, Phone } from 'lucide-react';
+import { IconBrandLinkedin, IconMail, IconArrowUp } from '@tabler/icons-react';
 
-const Footer = () => {
-  return (
-    <footer className="bg-slate-900 dark:bg-gray-950 text-white py-12 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Brand */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Jessa Ardithya</h3>
-            <p className="text-slate-400 dark:text-slate-500 text-sm leading-relaxed">
-              Technical Sales Specialist passionate about data solutions, 
-              cloud technologies, and helping businesses leverage analytics 
-              for better decision making.
-            </p>
-          </div>
+const marqueeItems = [
+  'Data Solutions', 'Cloud Analytics', 'Enterprise Software',
+  'Technical Sales', 'SAS VIYA', 'IBM Cloud', 'Alibaba Cloud',
+  'Pre-Sales', 'Couchbase', 'OceanBase', 'Teradata', 'Alteryx',
+];
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#hero" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
-                  About
-                </a>
-              </li>
-              {/* <li>
-                <a href="#tech-stack" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
-                  Tech Stack
-                </a>
-              </li> */}
-              <li>
-                <a href="#timeline" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
-                  Timeline
-                </a>
-              </li>
-              <li>
-                <a href="#experience" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
-                  Experience
-                </a>
-              </li>
-              <li>
-                <a href="#education" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
-                  Education
-                </a>
-              </li>
-              <li>
-                <a href="#skills" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
-                  Skills
-                </a>
-              </li>
-              <li>
-                <a href="#projects" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
-                  Projects
-                </a>
-              </li>
-              <li>
-                <a href="#certifications" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
-                  Certifications
-                </a>
-              </li>
-            </ul>
-          </div>
+const Footer = () => (
+  <footer className="bg-ink border-t border-cream/8 overflow-hidden">
 
-          {/* Contact Info */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Contact</h4>
-            <div className="space-y-3 text-sm">
-              <div className="flex items-center gap-3">
-                <Mail size={16} className="text-blue-400 dark:text-blue-500" />
-                <a href="mailto:jessaardithya@gmail.com" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
-                  jessaardithya@gmail.com
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <Phone size={16} className="text-blue-400 dark:text-blue-500" />
-                <a href="tel:+628953332486" className="text-slate-400 dark:text-slate-500 hover:text-white transition-colors">
-                  +62 8953-3324-8683
-                </a>
-              </div>
-              <div className="flex items-center gap-3 pt-2">
-                <a
-                   href="https://www.linkedin.com/in/jessa-ardithya-chriswantoro-3a8971179/"
-                  className="w-8 h-8 bg-blue-600 dark:bg-blue-700 rounded-lg flex items-center justify-center hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Linkedin size={16} />
-                </a>
-              </div>
-            </div>
-          </div>
+    {/* Marquee strip */}
+    <div className="border-b border-cream/8 py-3 overflow-hidden">
+      <div className="marquee-track">
+        {[...marqueeItems, ...marqueeItems].map((item, i) => (
+          <span key={i} className="mx-6 font-display font-bold text-sm text-cream/15 whitespace-nowrap">
+            {item}
+            <span className="mx-6 text-violet/40">·</span>
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-10">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        {/* Brand */}
+        <div>
+          <a href="#hero" className="font-display font-extrabold text-xl text-cream tracking-tight">
+            J<span className="text-violet">.</span>A<span className="text-violet">.</span>C
+          </a>
+          <p className="text-xs text-cream/30 mt-1.5 max-w-xs leading-relaxed">
+            Technical Sales Specialist — bridging enterprise data tech and business value since 2019.
+          </p>
         </div>
 
-        <div className="border-t border-slate-700 dark:border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-slate-400 dark:text-slate-500 text-sm">
-            © 2025 Jessa Ardithya Chriswantoro. All rights reserved.
-          </p>
-         
+        {/* Social icons */}
+        <div className="flex items-center gap-2.5">
+          <a href="mailto:jessaardithya@gmail.com"
+            className="w-10 h-10 rounded-2xl border border-cream/10 bg-cream/4 hover:bg-violet/20 hover:border-violet/30 flex items-center justify-center text-cream/40 hover:text-violet-light transition-all"
+            aria-label="Email">
+            <IconMail size={16} />
+          </a>
+          <a href="https://www.linkedin.com/in/jessa-ardithya-chriswantoro-3a8971179/"
+            target="_blank" rel="noopener noreferrer"
+            className="w-10 h-10 rounded-2xl border border-cream/10 bg-cream/4 hover:bg-violet/20 hover:border-violet/30 flex items-center justify-center text-cream/40 hover:text-violet-light transition-all"
+            aria-label="LinkedIn">
+            <IconBrandLinkedin size={16} />
+          </a>
+          <a href="#hero"
+            className="w-10 h-10 rounded-2xl border border-cream/10 bg-cream/4 hover:bg-violet/20 hover:border-violet/30 flex items-center justify-center text-cream/40 hover:text-violet-light transition-all"
+            aria-label="Back to top">
+            <IconArrowUp size={16} />
+          </a>
         </div>
       </div>
-    </footer>
-  );
-};
+
+      <div className="mt-8 pt-6 border-t border-cream/6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p className="font-mono text-[10px] text-cream/20">
+          © 2025 Jessa Ardithya Chriswantoro. All rights reserved.
+        </p>
+        <nav className="flex flex-wrap gap-x-5 gap-y-1">
+          {[['About', '#hero'], ['Stack', '#tech-stack'], ['Journey', '#timeline'], ['Skills', '#skills'], ['Projects', '#projects'], ['Contact', '#contact']].map(([l, h]) => (
+            <a key={l} href={h} className="font-mono text-[10px] text-cream/20 hover:text-violet-light transition-colors">{l}</a>
+          ))}
+        </nav>
+      </div>
+    </div>
+  </footer>
+);
 
 export default Footer;

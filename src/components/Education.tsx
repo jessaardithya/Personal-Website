@@ -1,80 +1,69 @@
-import { GraduationCap, Calendar, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { IconSchool, IconMapPin, IconCalendar, IconStar } from '@tabler/icons-react';
 
-const Education = () => {
-  const education = [
-    {
-      degree: 'Computer Science',
-      institution: 'Universitas Bina Nusantara',
-      location: 'Jakarta, Indonesia',
-      period: '2021 - 2025',
-      status: 'Completed'
-    },
-    {
-      degree: 'Software Engineering',
-      institution: 'SMK Wikrama Bogor',
-      location: 'Bogor, Indonesia',
-      period: '2016 - 2019',
-      status: 'Completed'
-    }
-  ];
+const education = [
+  {
+    degree: 'Bachelor of Computer Science',
+    school: 'Universitas Bina Nusantara Online Learning',
+    loc: 'Jakarta',
+    period: 'Jul 2021 — May 2025',
+    honor: 'Magna Cum Laude — GPA 3.78',
+  },
+  {
+    degree: 'Software Engineering',
+    school: 'SMK Wikrama Bogor',
+    loc: 'Bogor',
+    period: '2016 — 2019',
+    honor: null,
+  },
+];
 
-  return (
-    <section id="education" className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Education
-          </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Academic foundation in computer science and software engineering
-          </p>
-        </div>
+const Education = () => (
+  <section id="education" className="py-24 bg-violet-soft dark:bg-[#0e0b1a]">
+    <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="mb-12"
+      >
+        <div className="section-eyebrow">Academic Background</div>
+        <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-ink dark:text-cream tracking-tight">Education</h2>
+      </motion.div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-8">
-            {education.map((edu, index) => (
-              <div key={index} className="bg-slate-50 dark:bg-gray-900 rounded-lg p-8 hover:shadow-md transition-all duration-200 hover:-translate-y-0.5">
-                <div className="flex items-start gap-6">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <GraduationCap size={24} className="text-blue-600 dark:text-blue-400" />
-                  </div>
-                  
-                  <div className="flex-1">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
-                      <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                        {edu.degree}
-                      </h3>
-                      <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium mt-2 md:mt-0 ${
-                        edu.status === 'Completed' 
-                          ? 'bg-green-100 text-green-700' 
-                          : 'bg-blue-100 text-blue-700'
-                      }`}>
-                        {edu.status}
-                      </span>
-                    </div>
-                    
-                    <div className="text-slate-600 dark:text-slate-300 space-y-2">
-                      <div className="font-medium text-lg">{edu.institution}</div>
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm">
-                        <div className="flex items-center gap-1">
-                          <MapPin size={14} />
-                          {edu.location}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar size={14} />
-                          {edu.period}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-3xl">
+        {education.map((e, i) => (
+          <motion.div
+            key={e.school}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ y: -4, rotate: -0.5 }}
+            className="card-lift rounded-3xl p-6 bg-white dark:bg-white/5 border border-ink/8 dark:border-cream/8"
+          >
+            <div className="w-12 h-12 rounded-2xl bg-violet/10 flex items-center justify-center mb-4">
+              <IconSchool size={24} className="text-violet" />
+            </div>
+            <p className="font-display font-extrabold text-xl text-ink dark:text-cream leading-tight">{e.degree}</p>
+            <p className="mt-1 text-sm font-semibold text-ink/60 dark:text-cream/50">{e.school}</p>
+            <div className="mt-4 flex flex-col gap-1 text-xs text-ink/40 dark:text-cream/30">
+              <span className="flex items-center gap-1.5"><IconMapPin size={12} className="text-violet" />{e.loc}, Indonesia</span>
+              <span className="flex items-center gap-1.5"><IconCalendar size={12} className="text-violet" />{e.period}</span>
+            </div>
+            {e.honor && (
+              <div className="mt-4 flex items-center gap-2 px-3 py-2 rounded-2xl bg-violet/10 border border-violet/20">
+                <IconStar size={14} className="text-violet shrink-0" />
+                <span className="text-xs font-bold text-violet dark:text-violet-light">{e.honor}</span>
               </div>
-            ))}
-          </div>
-        </div>
+            )}
+            {!e.honor && (
+              <div className="mt-4">
+                <span className="pill text-emerald-600 dark:text-emerald-400 border-emerald-400/40 text-[10px]">✓ Completed</span>
+              </div>
+            )}
+          </motion.div>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Education;

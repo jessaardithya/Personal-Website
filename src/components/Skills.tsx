@@ -1,101 +1,93 @@
-import { Code, Database, Cloud, Settings } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const Skills = () => {
-  const skillCategories = [
-    {
-      title: 'Programming Languages',
-      icon: Code,
-      skills: [
-        'PHP (Laravel)',
-        'JavaScript',
-        'Python',
-        'Java',
-        'HTML/CSS',
-        'Node.js',
-        'React.js'
-      ]
-    },
-    {
-      title: 'Databases',
-      icon: Database,
-      skills: [
-        'MySQL',
-        'PostgreSQL',
-        'MongoDB',
-        'IBM DB2',
-        'MSSQL',
-        'Couchbase',
-        'OceanBase'
-      ]
-    },
-    {
-      title: 'Cloud & Analytics',
-      icon: Cloud,
-      skills: [
-        'SAS VIYA',
-        'Alibaba Cloud EMR',
-        'IBM Watson Studio',
-        'IBM Cognos Analytics',
-        'Teradata',
-        'Tableau',
-        'Alteryx'
-      ]
-    },
-    {
-      title: 'DevOps & Tools',
-      icon: Settings,
-      skills: [
-        'Docker',
-        'Kubernetes',
-        'IBM DataStage',
-        'dbt',
-        'Airbyte',
-        'IBM CDC'
-      ]
-    }
-  ];
+const cats = [
+  { name: 'Programming Languages', color: '#60A5FA', emoji: '⌨️',
+    skills: ['PHP (Laravel)', 'JavaScript', 'React.js', 'Node.js', 'Python', 'Java', 'HTML/CSS'] },
+  { name: 'Databases', color: '#A78BFA', emoji: '🗄️',
+    skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'IBM DB2', 'MSSQL', 'Couchbase', 'OceanBase'] },
+  { name: 'Data Warehouse', color: '#38BDF8', emoji: '🏗️',
+    skills: ['Teradata Vantage', 'IBM DB2 Warehouse', 'Alibaba Cloud EMR'] },
+  { name: 'Analytics Platforms', color: '#34D399', emoji: '📊',
+    skills: ['SAS VIYA', 'SAS Analytics Pro', 'SAS Data Management', 'SAS Fraud Management', 'SAS IFRS17', 'IBM Cognos Analytics', 'Tableau', 'Alteryx'] },
+  { name: 'IBM AI & Data', color: '#F472B6', emoji: '🤖',
+    skills: ['Watsonx.ai', 'Watsonx.data', 'Watsonx.data Integration', 'Watsonx.data Intelligence', 'IBM Watson Studio', 'IBM Watson Machine Learning', 'IBM DataStage'] },
+  { name: 'DevOps & Tools', color: '#FB923C', emoji: '🔧',
+    skills: ['Docker', 'Kubernetes', 'dbt', 'Airbyte', 'IBM Change Data Capture', 'IBM Cognos Analytics'] },
+];
 
-  return (
-    <section id="skills" className="py-20 bg-slate-50 dark:bg-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Technical Skills
+const Skills = () => (
+  <section id="skills" className="py-24 bg-cream dark:bg-ink overflow-hidden">
+    <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="mb-14 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"
+      >
+        <div>
+          <div className="section-eyebrow">Expertise</div>
+          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-ink dark:text-cream tracking-tight">
+            Technical<br /><span className="text-violet-gradient">Skills</span>
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Comprehensive expertise across programming, databases, cloud platforms, and analytics tools
-          </p>
         </div>
+        <p className="text-sm text-ink/50 dark:text-cream/40 max-w-xs">
+          A broad stack spanning languages, databases, cloud platforms, and AI analytics tooling.
+        </p>
+      </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {skillCategories.map((category, index) => {
-            const IconComponent = category.icon;
-            return (
-              <div key={index} className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
-                    <IconComponent size={24} className="text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                    {category.title}
-                  </h3>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="flex items-center">
-                      <span className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mr-3 flex-shrink-0"></span>
-                      <span className="text-sm text-slate-700 dark:text-slate-300">{skill}</span>
-                    </div>
-                  ))}
-                </div>
+      {/* Skill categories */}
+      <div className="space-y-10">
+        {cats.map((cat, ci) => (
+          <motion.div
+            key={cat.name}
+            initial={{ opacity: 0, x: ci % 2 === 0 ? -30 : 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: ci * 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col sm:flex-row sm:items-start gap-5"
+          >
+            {/* Label */}
+            <div className="sm:w-52 shrink-0">
+              <div className="inline-flex items-center gap-2">
+                <span className="text-2xl">{cat.emoji}</span>
+                <span className="font-display font-bold text-sm text-ink dark:text-cream leading-tight">{cat.name}</span>
               </div>
-            );
-          })}
+            </div>
+
+            {/* Pills — flowing, no rigid grid */}
+            <div className="flex flex-wrap gap-2">
+              {cat.skills.map((skill, si) => (
+                <motion.span
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: si * 0.04 }}
+                  whileHover={{ scale: 1.06, y: -2 }}
+                  className="px-3.5 py-2 rounded-full text-sm font-semibold border-2 transition-all cursor-default"
+                  style={{
+                    borderColor: `${cat.color}30`,
+                    background: `${cat.color}10`,
+                    color: cat.color,
+                  }}
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Decorative bottom marquee */}
+      <div className="mt-16 overflow-hidden -mx-5 sm:-mx-8">
+        <div className="marquee-track">
+          {[...cats.flatMap((c) => c.skills), ...cats.flatMap((c) => c.skills)].map((s, i) => (
+            <span key={i} className="mx-4 font-display font-bold text-3xl sm:text-4xl text-ink/5 dark:text-cream/5 whitespace-nowrap">{s}</span>
+          ))}
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Skills;

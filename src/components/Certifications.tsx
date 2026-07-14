@@ -1,192 +1,184 @@
 import { useState } from 'react';
-import { Award, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { IconAward, IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+
+const catColors: Record<string, string> = {
+  IBM:          '#60A5FA',
+  SAS:          '#34D399',
+  Database:     '#A78BFA',
+  Analytics:    '#FB923C',
+  Professional: '#94A3B8',
+};
+
+const certs = [
+  // IBM — Cloud Pak & Data Platform
+  { name: 'IBM Cloud Pak for Data V3.5 Essentials',              cat: 'IBM' },
+  { name: 'IBM Cloud Pak for Data V3.5 Administrator',           cat: 'IBM' },
+  { name: 'IBM Cloud Pak for Data V3.5 Administration',          cat: 'IBM' },
+  { name: 'IBM Cloud Pak for Data V3.5 Data Engineer',           cat: 'IBM' },
+  { name: 'IBM Cloud Pak for Data V3.5 Data Access & Transformation', cat: 'IBM' },
+  // IBM — DataStage & DB2
+  { name: 'IBM DataStage V11.5.x on Cloud Infrastructure',       cat: 'IBM' },
+  { name: 'IBM DataStage V11.5.x – Batch Processing',            cat: 'IBM' },
+  { name: 'IBM DataStage V11.5.x – Combining Data',              cat: 'IBM' },
+  { name: 'IBM Db2 LUW V11.x Foundation',                        cat: 'IBM' },
+  { name: 'IBM Db2 LUW V11.x Advanced Database',                 cat: 'IBM' },
+  // IBM — Infosphere & Data Governance
+  { name: 'IBM Infosphere Data Replication V11.4.x Foundation',  cat: 'IBM' },
+  { name: 'IBM Data Governance and Privacy Technical Sales Intermediate', cat: 'IBM' },
+  { name: 'Master Data Management Sales Foundation',             cat: 'IBM' },
+  // IBM — Informix
+  { name: 'IBM Informix Technical Sales Intermediate',           cat: 'IBM' },
+  { name: 'IBM Informix Sales Foundation',                       cat: 'IBM' },
+  // IBM — Data Science
+  { name: 'IBM Data Science Tools',                              cat: 'IBM' },
+  { name: 'IBM Data Science Foundation – Level 1',               cat: 'IBM' },
+  { name: 'IBM Data Science Methodology',                        cat: 'IBM' },
+  { name: 'IBM Data Science for Business – Level 1',             cat: 'IBM' },
+  // IBM — Customer 360
+  { name: 'IBM Customer 360 Sales Foundation',                   cat: 'IBM' },
+  { name: 'IBM Customer 360 Technical Sales Intermediate',       cat: 'IBM' },
+  // IBM — Watsonx
+  { name: 'IBM watsonx.data Technical Essentials',               cat: 'Watsonx' },
+  { name: 'IBM watsonx.governance: Technical Essentials',        cat: 'Watsonx' },
+  { name: 'watsonx.data Sales Foundation',                       cat: 'Watsonx' },
+  { name: 'watsonx.data Technical Sales Intermediate',           cat: 'Watsonx' },
+  { name: 'watsonx.data Intelligence Practitioner Advanced',     cat: 'Watsonx' },
+  { name: 'IBM BOB Intermediate',                                cat: 'Watsonx' },
+  { name: 'Maximo Application Suite Technical Sales Intermediate', cat: 'Watsonx' },
+  // SAS
+  { name: 'SAS Viya 3.5 Core Topics',                           cat: 'SAS' },
+  { name: 'SAS Viya 3.5 Architecture Topics',                   cat: 'SAS' },
+  { name: 'SAS Machine Learning using SAS Viya',                cat: 'SAS' },
+  { name: 'SAS Visual Analytics 1 for SAS Viya: Basics',        cat: 'SAS' },
+  { name: 'SAS DataFlux Management Studio: Fast Track (2.6)',   cat: 'SAS' },
+  // Database
+  { name: 'Teradata Vantage Fundamental',                        cat: 'Database' },
+  { name: 'Teradata VantageCloud Lake',                          cat: 'Database' },
+  { name: 'Teradata Vantage 2.4 with ClearScape',               cat: 'Database' },
+  { name: 'Teradata Advanced SQL Engine 17.10',                  cat: 'Database' },
+  { name: 'Couchbase Architecture Associated',                   cat: 'Database' },
+  { name: 'OceanBase Database Associated',                       cat: 'Database' },
+  // Analytics
+  { name: 'Alteryx Foundation Micro-Credential',                 cat: 'Analytics' },
+  { name: 'Alteryx Machine Learning Fundamentals Micro-Credential', cat: 'Analytics' },
+  { name: 'Alteryx Auto Insights Micro-Credential',              cat: 'Analytics' },
+  { name: 'Alteryx Designer Core Micro-Credential: General Knowledge', cat: 'Analytics' },
+  { name: 'Alteryx Designer Core Micro-Credential: Data Preparation',  cat: 'Analytics' },
+  { name: 'Alteryx Designer Core Micro-Credential: Data Manipulation', cat: 'Analytics' },
+  { name: 'Alteryx Designer Core Micro-Credential: Data Transformation', cat: 'Analytics' },
+  { name: 'Alteryx Designer Core',                               cat: 'Analytics' },
+  { name: 'Alteryx Designer Advanced',                           cat: 'Analytics' },
+  { name: 'Alteryx Server Administration',                       cat: 'Analytics' },
+  { name: 'Alteryx Server Implementation',                       cat: 'Analytics' },
+  // Professional
+  { name: 'LSP for Web Programmer',                              cat: 'Professional' },
+];
+
+const allCats = ['All', 'IBM', 'SAS', 'Database', 'Analytics', 'Professional'];
+const PER = 12;
 
 const Certifications = () => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [currentPage, setCurrentPage] = useState(1);
-  const certificationsPerPage = 12;
+  const [sel, setSel] = useState('All');
+  const [page, setPage] = useState(1);
 
-  const certifications = [
-    // IBM Certifications
-    { name: 'IBM Cloud Pak for Data V3.5 Essentials', category: 'IBM', year: '2023' },
-    { name: 'IBM Cloud Pak for Data V3.5 Administrator', category: 'IBM', year: '2023' },
-    { name: 'IBM Cloud Pak for Data V3.5 Data Engineer', category: 'IBM', year: '2023' },
-    { name: 'IBM DataStage V11.5.x on Cloud Infrastructure', category: 'IBM', year: '2022' },
-    { name: 'IBM Db2 LUW V11.x Foundation', category: 'IBM', year: '2022' },
-    { name: 'IBM Db2 LUW V11.x Advanced Database', category: 'IBM', year: '2022' },
-    { name: 'IBM Informix Technical Sales Intermediate', category: 'IBM', year: '2021' },
-    { name: 'IBM Data Science Tools', category: 'IBM', year: '2021' },
-    { name: 'IBM Data Science Foundation – Level 1', category: 'IBM', year: '2021' },
-    
-    // SAS Certifications
-    { name: 'SAS Viya 3.5 Core Topics', category: 'SAS', year: '2023' },
-    { name: 'SAS Viya 3.5 Architecture Topics', category: 'SAS', year: '2023' },
-    { name: 'SAS Machine Learning using SAS Viya', category: 'SAS', year: '2023' },
-    { name: 'SAS Visual Analytics 1 for SAS Viya: Basics', category: 'SAS', year: '2022' },
-    { name: 'SAS DataFlux Management Studio: Fast Track', category: 'SAS', year: '2022' },
-    
-    // Database Certifications
-    { name: 'Teradata Vantage Fundamental', category: 'Database', year: '2024' },
-    { name: 'Couchbase Architecture Associated', category: 'Database', year: '2024' },
-    { name: 'OceanBase Database Associated', category: 'Database', year: '2024' },
-    
-    // Analytics Certifications
-    { name: 'Alteryx Foundation Micro-Credential', category: 'Analytics', year: '2024' },
-    { name: 'Alteryx Machine Learning Fundamentals', category: 'Analytics', year: '2024' },
-    { name: 'Alteryx Designer Core Micro-Credential', category: 'Analytics', year: '2024' },
-    { name: 'Alteryx Server Administration', category: 'Analytics', year: '2024' },
-    
-    // Professional Certifications
-    { name: 'LSP for Web Programmer', category: 'Professional', year: '2019-2022' }
-  ];
+  const filtered = sel === 'All' ? certs : certs.filter((c) => c.cat === sel);
+  const total    = Math.ceil(filtered.length / PER);
+  const current  = filtered.slice((page - 1) * PER, page * PER);
 
-  const categories = ['All', 'IBM', 'SAS', 'Database', 'Analytics', 'Professional'];
-  
-  const filteredCertifications = selectedCategory === 'All' 
-    ? certifications 
-    : certifications.filter(cert => cert.category === selectedCategory);
-
-  const totalPages = Math.ceil(filteredCertifications.length / certificationsPerPage);
-  const startIndex = (currentPage - 1) * certificationsPerPage;
-  const currentCertifications = filteredCertifications.slice(startIndex, startIndex + certificationsPerPage);
-
-  const getCategoryColor = (category: string) => {
-    const colors = {
-      'IBM': 'bg-blue-100 text-blue-700',
-      'SAS': 'bg-green-100 text-green-700',
-      'Database': 'bg-purple-100 text-purple-700',
-      'Analytics': 'bg-orange-100 text-orange-700',
-      'Professional': 'bg-gray-100 text-gray-700'
-    };
-    return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-700';
-  };
-
-  const handlePageChange = (page:number) => {
-    setCurrentPage(page);
-  };
-
-  const handleCategoryChange = (category:string) => {
-    setSelectedCategory(category);
-    setCurrentPage(1);
-  };
+  const handleSel = (s: string) => { setSel(s); setPage(1); };
 
   return (
-    <section id="certifications" className="py-20 bg-slate-50 dark:bg-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Professional Certifications
+    <section id="certifications" className="py-24 bg-violet-soft dark:bg-[#0e0b1a] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-12"
+        >
+          <div className="section-eyebrow">Credentials</div>
+          <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-ink dark:text-cream tracking-tight">
+            Professional<br /><span className="text-violet-gradient">Certifications</span>
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Comprehensive certifications across leading enterprise platforms and technologies
-          </p>
+          <p className="mt-3 text-ink/50 dark:text-cream/40 text-sm">{certs.length} certifications across leading enterprise platforms.</p>
+        </motion.div>
+
+        {/* Category filter with counts */}
+        <div className="flex flex-wrap gap-2.5 mb-10">
+          {allCats.map((c) => {
+            const count = c === 'All' ? certs.length : certs.filter((x) => x.cat === c).length;
+            const color = catColors[c] ?? '#94A3B8';
+            const isActive = sel === c;
+            return (
+              <button key={c} onClick={() => handleSel(c)}
+                className="flex items-center gap-2 px-4 py-2 rounded-full border-2 text-xs font-bold transition-all"
+                style={{
+                  borderColor: isActive ? color : `${color}30`,
+                  background:  isActive ? color : `${color}10`,
+                  color:       isActive ? '#0A0A0A' : color,
+                  boxShadow:   isActive ? `0 4px 20px ${color}40` : undefined,
+                }}
+              >
+                <IconAward size={12} />
+                {c}
+                <span className={`px-1.5 py-0.5 rounded-full text-[9px] font-black ${isActive ? 'bg-black/20' : 'bg-current/10'}`}
+                  style={{ background: isActive ? 'rgba(0,0,0,0.2)' : `${color}20` }}>
+                  {count}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300 mr-4">
-            <Filter size={16} />
-            <span className="text-sm font-medium">Filter by:</span>
-          </div>
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => handleCategoryChange(category)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
-                selectedCategory === category
-                  ? 'bg-blue-600 dark:bg-blue-700 text-white'
-                  : 'bg-white dark:bg-gray-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        {/* Certifications Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {currentCertifications.map((cert, index) => (
-            <div key={index} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-200 border border-slate-100 dark:border-gray-700">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                    <Award size={20} className="text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${getCategoryColor(cert.category)}`}>
-                      {cert.category}
-                    </span>
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {current.map((cert, idx) => {
+            const color = catColors[cert.cat] ?? '#94A3B8';
+            return (
+              <motion.div
+                key={cert.name}
+                initial={{ opacity: 0, scale: 0.94 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: idx * 0.03, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -3, rotate: 0.5 }}
+                className="flex items-start gap-3 rounded-2xl border bg-white dark:bg-white/4 p-4 transition-all"
+                style={{ borderColor: `${color}25` }}
+              >
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: `${color}18` }}>
+                  <IconAward size={17} style={{ color }} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-ink dark:text-cream leading-snug">{cert.name}</p>
+                  <div className="flex items-center gap-2 mt-1.5">
+                    <span className="font-mono text-[9px] font-bold uppercase tracking-widest" style={{ color }}>{cert.cat}</span>
                   </div>
                 </div>
-                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                  {cert.year}
-                </span>
-              </div>
-              
-              <h3 className="text-sm font-semibold text-slate-900 dark:text-white leading-tight">
-                {cert.name}
-              </h3>
-            </div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 mt-12">
-            <button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className={`p-2 rounded-lg transition-colors duration-200 ${
-                currentPage === 1
-                  ? 'text-slate-400 dark:text-slate-600 cursor-not-allowed'
-                  : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              <ChevronLeft size={20} />
+        {total > 1 && (
+          <div className="flex items-center justify-center gap-2 mt-10">
+            <button onClick={() => setPage((p) => p - 1)} disabled={page === 1}
+              className="p-2 rounded-full bg-ink/5 dark:bg-cream/8 text-ink/40 dark:text-cream/40 hover:bg-violet/15 hover:text-violet disabled:opacity-30 transition-colors">
+              <IconChevronLeft size={16} />
             </button>
-            
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                onClick={() => handlePageChange(page)}
-                className={`px-4 py-2 rounded-lg transition-colors duration-200 ${
-                  currentPage === page
-                    ? 'bg-blue-600 dark:bg-blue-700 text-white'
-                    : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-700'
-                }`}
-              >
-                {page}
+            {Array.from({ length: total }, (_, i) => i + 1).map((n) => (
+              <button key={n} onClick={() => setPage(n)}
+                className={`w-9 h-9 rounded-full text-xs font-bold transition-all ${page === n ? 'pill-active' : 'text-ink/50 dark:text-cream/40 hover:bg-violet/15 hover:text-violet'}`}>
+                {n}
               </button>
             ))}
-            
-            <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className={`p-2 rounded-lg transition-colors duration-200 ${
-                currentPage === totalPages
-                  ? 'text-slate-400 dark:text-slate-600 cursor-not-allowed'
-                  : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              <ChevronRight size={20} />
+            <button onClick={() => setPage((p) => p + 1)} disabled={page === total}
+              className="p-2 rounded-full bg-ink/5 dark:bg-cream/8 text-ink/40 dark:text-cream/40 hover:bg-violet/15 hover:text-violet disabled:opacity-30 transition-colors">
+              <IconChevronRight size={16} />
             </button>
           </div>
         )}
-
-        {/* Summary Stats */}
-        <div className="mt-16 bg-white dark:bg-gray-800 rounded-lg p-8 shadow-sm">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
-            {categories.slice(1).map((category) => {
-              const count = certifications.filter(cert => cert.category === category).length;
-              return (
-                <div key={category} className="space-y-2">
-                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{count}</div>
-                  <div className="text-sm text-slate-600 dark:text-slate-300">{category}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
       </div>
     </section>
   );
